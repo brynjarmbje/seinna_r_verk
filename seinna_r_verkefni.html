@@ -1961,7 +1961,7 @@ margin-left: 0 !important;
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a href="#hluti-1---gagnamöndl-30" id="toc-hluti-1---gagnamöndl-30">Hluti 1 - Gagnamöndl (30
+            <li><a href="#hluti-1---gagnamöndl-10" id="toc-hluti-1---gagnamöndl-10">Hluti 1 - Gagnamöndl (10
             %)</a>
             <ul>
             <li><a href="#a" id="toc-a">a)</a></li>
@@ -1970,6 +1970,17 @@ margin-left: 0 !important;
             <li><a href="#d" id="toc-d">d)</a></li>
             <li><a href="#e" id="toc-e">e)</a></li>
             <li><a href="#f" id="toc-f">f)</a></li>
+            <li><a href="#g" id="toc-g">g)</a></li>
+            </ul></li>
+            <li><a href="#hluti-3-25" id="toc-hluti-3-25">Hluti 3 (25
+            %)</a>
+            <ul>
+            <li><a href="#k-kannið-með-viðeigandi-tilgátuprófi-hvort-munur-sé-á-meðalfermetraverði-fasteigna-eftir-því-hvort-þær-séu-sérbýli-eða-fjölbýli.-setjið-tilgáturnar-fram-tilgreinið-gildið-á-prófstærðinni-p-gildið-og-hvaða-ályktun-þið-dragið." id="toc-k-kannið-með-viðeigandi-tilgátuprófi-hvort-munur-sé-á-meðalfermetraverði-fasteigna-eftir-því-hvort-þær-séu-sérbýli-eða-fjölbýli.-setjið-tilgáturnar-fram-tilgreinið-gildið-á-prófstærðinni-p-gildið-og-hvaða-ályktun-þið-dragið.">k)
+            Kannið með viðeigandi tilgátuprófi hvort munur sé á
+            meðalfermetraverði fasteigna eftir því hvort þær séu sérbýli
+            eða fjölbýli. Setjið tilgáturnar fram, tilgreinið gildið á
+            prófstærðinni, p-gildið og hvaða ályktun þið
+            dragið.</a></li>
             </ul></li>
             </ul>
           </div>
@@ -2005,9 +2016,11 @@ margin-left: 0 !important;
 <pre class="r"><code>library(tidyverse)
 library(ggplot2)
 library(scales)
-library(knitr)</code></pre>
-<div id="hluti-1---gagnamöndl-30" class="section level1">
-<h1>Hluti 1 - Gagnamöndl (30 %)</h1>
+library(knitr)
+library(readr)
+library(dplyr)</code></pre>
+<div id="hluti-1---gagnamöndl-10" class="section level1">
+<h1>Hluti 1 - Gagnamöndl (10 %)</h1>
 <div id="a" class="section level2">
 <h2>a)</h2>
 <p>Lesið gagnasafnið inn í R/RStudio með skipuninni hér að neðan og
@@ -2057,6 +2070,98 @@ bik &lt;- filter(bik, postnr%in%pnr)</code></pre>
 <p>Kannið gerð breytanna í gagnarammanum ykkar og breytið ef þarf.</p>
 <pre class="r"><code>bik &lt;- mutate(bik, emnr = factor(emnr))
 bik &lt;- mutate(bik, postnr = factor(postnr))</code></pre>
+</div>
+<div id="g" class="section level2">
+<h2>g)</h2>
+<p>Hugsum okkur nú að eignirnar í gagnarammanum ykkar sé þýðið ykkar. Nú
+ætlum við að taka úrtak úr þýðinu, 200 eignir úr hverju hverfi. Það má
+gera á eftirfarandi hátt:</p>
+<pre class="r"><code>set.seed(39)
+bik %&gt;% 
+group_by(postnr) %&gt;%
+sample_n(size = 200) -&gt; urtak</code></pre>
+</div>
+</div>
+<div id="hluti-3-25" class="section level1">
+<h1>Hluti 3 (25 %)</h1>
+<div id="k-kannið-með-viðeigandi-tilgátuprófi-hvort-munur-sé-á-meðalfermetraverði-fasteigna-eftir-því-hvort-þær-séu-sérbýli-eða-fjölbýli.-setjið-tilgáturnar-fram-tilgreinið-gildið-á-prófstærðinni-p-gildið-og-hvaða-ályktun-þið-dragið." class="section level2">
+<h2>k) Kannið með viðeigandi tilgátuprófi hvort munur sé á
+meðalfermetraverði fasteigna eftir því hvort þær séu sérbýli eða
+fjölbýli. Setjið tilgáturnar fram, tilgreinið gildið á prófstærðinni,
+p-gildið og hvaða ályktun þið dragið.</h2>
+<pre class="r"><code># Búum til tvö úrtök, eitt fyrir sérbýli og annað fyrir fjölbýli
+serbýli &lt;- filter(bik, tegund == &quot;Serbyli&quot;)$fermetraverd
+fjölbýli &lt;- filter(bik, tegund == &quot;Fjolbyli&quot;)$fermetraverd
+
+# Framkvæmum t-prófið
+t_test_result &lt;- t.test(serbýli, fjölbýli, alternative = &quot;two.sided&quot;, var.equal = TRUE)
+
+# Prentum út niðurstöðurnar
+print(t_test_result)</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  serbýli and fjölbýli
+## t = -11.6, df = 16534, p-value &lt; 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -50.76019 -36.08557
+## sample estimates:
+## mean of x mean of y 
+##  374.1030  417.5259</code></pre>
+<p><strong>Tilgáturnar</strong> <strong>H0:</strong> Það er enginn munur
+á meðalfermetraverði milli sérbýla og fjölbýla. <code>r</code> (mu
+sérbýli. = mu fjölbýli) <strong>H1:</strong> Það er munur á sérbýli og
+fjölbýli (mu sérbýli =/ mu fjölbýli)</p>
+<p>Út frá niðurstöðunum úr t-prófinu sem þú hefur framkvæmt getum við
+sett fram og túlkað tilgáturnar, prófstærðina, p-gildið og dregið
+ályktanir.</p>
+<div id="tilgáturnar" class="section level3">
+<h3>Tilgáturnar</h3>
+<ul>
+<li><strong>Núlltilgáta (H0):</strong> Það er enginn munur á
+meðalfermetraverði milli sérbýla og fjölbýla. <span class="math inline">\(μ_{sérbýli} = μ_{fjölbýli}\)</span></li>
+<li><strong>Andstæð tilgáta (H1):</strong> Það er munur á
+meðalfermetraverði milli sérbýla og fjölbýla. <span class="math inline">\(μ_{sérbýli} ≠ μ_{fjölbýli}\)</span></li>
+</ul>
+</div>
+<div id="gildi-á-prófstærðinni" class="section level3">
+<h3>Gildi á prófstærðinni</h3>
+<p>Prófstærðin (t-gildið) er <strong>-11.6</strong>. Þetta talar um
+styrk sambandsins milli hópanna; í þessu tilviki, hversu mikill munur er
+á meðaltölum hópanna í samanburði við staðalfrávikin.</p>
+</div>
+<div id="p-gildi" class="section level3">
+<h3>P-gildi</h3>
+<p>P-gildið er <strong>minna en 2.2e-16</strong>, sem er mun minna en
+algengt markmið fyrir marktækni á 0.05 (5% líkur). Þetta þýðir að
+líkurnar á að fá þessar eða enn extremari niðurstöður, gefið að
+núlltilgátan sé rétt, eru mjög lágar.</p>
+</div>
+<div id="öryggisbil" class="section level3">
+<h3>95% Öryggisbil</h3>
+<p>95% öryggisbil fyrir muninn á meðaltölum er frá
+<strong>-50.76019</strong> til <strong>-36.08557</strong>. Þetta þýðir
+að við getum verið 95% viss um að raunverulegur munur á
+meðalfermetraverði milli sérbýla og fjölbýla liggi innan þessa bils.
+Athugið að öryggisbilið inniheldur ekki núllið, sem styður við marktækan
+mun.</p>
+</div>
+<div id="sample-estimates" class="section level3">
+<h3>Sample Estimates</h3>
+<p>Meðaltal fermetraverðs fyrir sérbýli (mean of x) er
+<strong>374.1030</strong>, og fyrir fjölbýli (mean of y) er
+<strong>417.5259</strong>.</p>
+</div>
+<div id="ályktun" class="section level3">
+<h3>Ályktun</h3>
+<p>Þar sem p-gildið er mjög lágt (minna en 2.2e-16), höfnum við
+núlltilgátunni og ályktum að marktækur munur sé á meðalfermetraverði
+milli sérbýla og fjölbýla. Gögnin benda til þess að meðalfermetraverð sé
+lægra fyrir sérbýli en fyrir fjölbýli, með marktækum mun. T-gildið og
+öryggisbilið gefa okkur frekari upplýsingar um stærð og átt þessa
+munar.</p>
+</div>
 </div>
 </div>
 </div>
