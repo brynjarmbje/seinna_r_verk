@@ -2127,22 +2127,23 @@ sample_n(size = 200) -&gt; urtak</code></pre>
 <div id="h-búið-til-töflu-sem-sýnir-fjölda-eigna-í-hverfunum-þremur-eftir-gerð-eigna-sérbýli-eða-fjölbýli." class="section level2">
 <h2>h) Búið til töflu sem sýnir fjölda eigna í hverfunum þremur eftir
 gerð eigna (sérbýli eða fjölbýli).</h2>
-<pre class="r"><code>bik %&gt;%
+<pre class="r"><code>urtak %&gt;%
   count(postnr, tegund) %&gt;%
   spread(key = tegund, value = n)</code></pre>
 <pre><code>## # A tibble: 3 × 3
+## # Groups:   postnr [3]
 ##   postnr Fjolbyli Serbyli
 ##   &lt;fct&gt;     &lt;int&gt;   &lt;int&gt;
-## 1 105        7575     208
-## 2 107        3592     184
-## 3 210        3499    1478</code></pre>
+## 1 105         197       3
+## 2 107         186      14
+## 3 210         133      67</code></pre>
 </div>
 <div id="i-búið-til-töflu-sem-sýnir-hlutfall-sérbýla-og-fjölbýla-í-hverfunum-þremur.-það-á-s.s.-að-vera-hægt-að-lesa-hvert-hlutfall-sérbýla-og-fjölbýla-er-í-hverju-hverfi-fyrir-sig." class="section level2">
 <h2>i) Búið til töflu sem sýnir hlutfall sérbýla og fjölbýla í hverfunum
 þremur. Það á s.s. að vera hægt að lesa hvert hlutfall sérbýla og
 fjölbýla er í hverju hverfi fyrir sig.</h2>
 <pre class="r"><code># Finna fjolda af hverri tegund i hverju  postsnr
-fjoldi &lt;- table(bik$postnr, bik$tegund)
+fjoldi &lt;- table(urtak$postnr, urtak$tegund)
 
 # Hlutfall fjolda
 hlutfall &lt;- prop.table(fjoldi, margin = 1)
@@ -2153,9 +2154,9 @@ prosent &lt;- round(hlutfall * 100, digits = 2)
 prosent</code></pre>
 <pre><code>##      
 ##       Fjolbyli Serbyli
-##   105    97.33    2.67
-##   107    95.13    4.87
-##   210    70.30   29.70</code></pre>
+##   105     98.5     1.5
+##   107     93.0     7.0
+##   210     66.5    33.5</code></pre>
 </div>
 <div id="j-kannið-með-viðeigandi-tilgátuprófi-hvort-hlutfall-fjölbýla-sé-misjafnt-í-hverfunum-þremur.-sýnið-úttakið-úr-prófinu.-eru-forsendur-til-að-nota-prófið-uppfylltar-setjið-tilgáturnar-fram-tilgreinið-gildið-á-prófstærðinni-p-gildið-og-hvaða-ályktun-þið-dragið." class="section level2">
 <h2>j) Kannið með viðeigandi tilgátuprófi hvort hlutfall fjölbýla sé
@@ -2168,13 +2169,14 @@ chi_test</code></pre>
 ##  Pearson&#39;s Chi-squared test
 ## 
 ## data:  fjoldi
-## X-squared = 2412.5, df = 2, p-value &lt; 2.2e-16</code></pre>
+## X-squared = 97.259, df = 2, p-value &lt; 2.2e-16</code></pre>
 <div id="núlltilgátan" class="section level3">
 <h3>Núlltilgátan</h3>
 <p>er að hlutfall fjölbýla sé það sama í öllum hverfum. ### Gagntilgátan
 er að hlutfall fjölbýla sé ekki það sama í öllum hverfum. ### Prófstærð
-og p-gildi Fyrir ofan sést að prófstærðin er 2412.4978359 og p-gildið 0.
-### Ályktun Þar sem p-gildið er minna en 0.05 er núlltilgátu hafnað.</p>
+og p-gildi Fyrir ofan sést að prófstærðin er 97.2591362 og p-gildið
+7.593586^{-22}. ### Ályktun Þar sem p-gildið er minna en 0.05 er
+núlltilgátu hafnað.</p>
 </div>
 </div>
 </div>
@@ -2186,8 +2188,8 @@ meðalfermetraverði fasteigna eftir því hvort þær séu sérbýli eða
 fjölbýli. Setjið tilgáturnar fram, tilgreinið gildið á prófstærðinni,
 p-gildið og hvaða ályktun þið dragið.</h2>
 <pre class="r"><code># Búum til tvö úrtök, eitt fyrir sérbýli og annað fyrir fjölbýli
-serbýli &lt;- filter(bik, tegund == &quot;Serbyli&quot;)$fermetraverd
-fjölbýli &lt;- filter(bik, tegund == &quot;Fjolbyli&quot;)$fermetraverd
+serbýli &lt;- filter(urtak, tegund == &quot;Serbyli&quot;)$fermetraverd
+fjölbýli &lt;- filter(urtak, tegund == &quot;Fjolbyli&quot;)$fermetraverd
 
 # Framkvæmum t-prófið
 t_test_result &lt;- t.test(serbýli, fjölbýli, alternative = &quot;two.sided&quot;, var.equal = TRUE)
@@ -2198,13 +2200,13 @@ print(t_test_result)</code></pre>
 ##  Two Sample t-test
 ## 
 ## data:  serbýli and fjölbýli
-## t = -11.6, df = 16534, p-value &lt; 2.2e-16
+## t = -2.8352, df = 598, p-value = 0.004734
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -50.76019 -36.08557
+##  -85.58636 -15.53835
 ## sample estimates:
 ## mean of x mean of y 
-##  374.1030  417.5259</code></pre>
+##  367.1402  417.7026</code></pre>
 <p>Út frá niðurstöðunum úr t-prófinu sem hefur verið framkvæmt getum við
 sett fram og túlkað tilgáturnar, prófstærðina, p-gildið og dregið
 ályktanir.</p>
@@ -2262,23 +2264,23 @@ séu stærri eða minni en 200 fermetrar (það skiptir ekki máli í hvorum
 flokknum 200 fermetra eignir lenda). Kallið flokkinn með stærri eignunum
 Stærri og minni eignunum Minni. Ábending: notið ifelse() til að búa til
 breytuna.</h2>
-<pre class="r"><code>bik$staerd200 &lt;- ifelse(bik$einflm &gt;= 200, &quot;Stærri&quot;, &quot;Minni&quot;)
+<pre class="r"><code>urtak$staerd200 &lt;- ifelse(urtak$einflm &gt;= 200, &quot;Stærri&quot;, &quot;Minni&quot;)
 
 # Skoðum fyrstu færslurnar til að sjá breytingarnar
-head(bik$staerd200)</code></pre>
-<pre><code>## [1] &quot;Minni&quot;  &quot;Stærri&quot; &quot;Minni&quot;  &quot;Minni&quot;  &quot;Minni&quot;  &quot;Minni&quot;</code></pre>
+head(urtak$staerd200)</code></pre>
+<pre><code>## [1] &quot;Stærri&quot; &quot;Minni&quot;  &quot;Minni&quot;  &quot;Minni&quot;  &quot;Minni&quot;  &quot;Minni&quot;</code></pre>
 </div>
 <div id="m-kannið-með-viðeigandi-tilgátuprófi-hvort-munur-sé-á-meðalfermetraverði-fasteigna-eftir-því-hvort-þær-séu-stærri-eða-minni-en-200-fermetrar.-setjið-tilgáturnar-fram-tilgreinið-gildið-á-prófstærðinni-p-gildið-og-hvaða-ályktun-þið-dragið." class="section level2">
 <h2>m) Kannið með viðeigandi tilgátuprófi hvort munur sé á
 meðalfermetraverði fasteigna eftir því hvort þær séu stærri eða minni en
 200 fermetrar. Setjið tilgáturnar fram, tilgreinið gildið á
 prófstærðinni, p-gildið og hvaða ályktun þið dragið.</h2>
-<pre class="r"><code># Gerum ráð fyrir að bik sé gagnarammi sem inniheldur fermetraverð í dálkinum &#39;verd&#39; 
+<pre class="r"><code># Gerum ráð fyrir að urtak sé gagnarammi sem inniheldur fermetraverð í dálkinum &#39;verd&#39; 
 # og flokkun eftir stærð í &#39;staerd200&#39; dálkinum
 
 # Skiptum gögnunum í tvo hópa
-staerri &lt;- bik$fermetraverd[bik$staerd200 == &quot;Stærri&quot;]
-minni &lt;- bik$fermetraverd[bik$staerd200 == &quot;Minni&quot;]
+staerri &lt;- urtak$fermetraverd[urtak$staerd200 == &quot;Stærri&quot;]
+minni &lt;- urtak$fermetraverd[urtak$staerd200 == &quot;Minni&quot;]
 
 # Framkvæmum t-próf fyrir óháð sýni
 t_test_result2 &lt;- t.test(staerri, minni)
@@ -2289,13 +2291,13 @@ print(t_test_result2)</code></pre>
 ##  Welch Two Sample t-test
 ## 
 ## data:  staerri and minni
-## t = -12.856, df = 1429.6, p-value &lt; 2.2e-16
+## t = -3.4824, df = 79.45, p-value = 0.000811
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -61.41417 -45.15346
+##  -92.51255 -25.22317
 ## sample estimates:
 ## mean of x mean of y 
-##  363.1564  416.4402</code></pre>
+##  357.4466  416.3144</code></pre>
 <div id="tilgáturnar-1" class="section level3">
 <h3>Tilgáturnar</h3>
 <ul>
@@ -2367,6 +2369,41 @@ p-gildið og hvaða ályktun þið dragið. Segði nokkur orð um hvort
 forsendur tilgátuprófsins séu uppfylltar. Þið þurfið ekki að prófa það
 með tilgátuprófi, nóg er að notast við myndrit (t.d. myndina í lið
 n).</p>
+<pre class="r"><code>fervikagreining &lt;- aov(fermetraverd ~ postnr, data = urtak)
+
+summary_fervik  &lt;- summary(fervikagreining)
+f_value &lt;- summary_fervik[[1]][&quot;postnr&quot;, &quot;F value&quot;]
+p_value &lt;- summary_fervik[[1]][&quot;postnr&quot;, &quot;Pr(&gt;F)&quot;]
+summary_fervik</code></pre>
+<pre><code>##              Df   Sum Sq Mean Sq F value Pr(&gt;F)  
+## postnr        2   114325   57163   2.471 0.0853 .
+## Residuals   597 13809344   23131                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div id="núlltilgáta" class="section level3">
+<h3>Núlltilgáta</h3>
+<p>Það er enginn munur á meðal fermetraverði í hverfunum.</p>
+</div>
+<div id="gagntilgáta" class="section level3">
+<h3>Gagntilgáta</h3>
+<p>Allavega eitt hverfi hefur öðruvísi meðal fermetraverð en hin
+hverfin.</p>
+</div>
+<div id="prófstærð-og-p-gildi" class="section level3">
+<h3>Prófstærð og p-gildi</h3>
+<p>Prófstærðin er F-gildið og það er 2.4712314 og p-gildið er
+0.0853446</p>
+</div>
+<div id="ályktun-2" class="section level3">
+<h3>Ályktun</h3>
+<p>Þar sem p-gildið er ekki minna en 0.05 er ekki hægt að hafna
+núlltilgátunni. Þetta þýðir að það er ekki hægt að segja að það sé
+umtalsverður munur á meðal fermetraverði milli hverfa. Miðað við boxplot
+að ofan þá sést að það eru einhverjir útlagar og einnig er p-gildið
+nálægt 0.05 sem þýðir að það er einhver munur en ekki alvveg nógu
+mikill. Það væri því gott að taka stærra úttak því það gæti gefið
+niðurstöður sem myndu hafna núlltilgátunni.</p>
+</div>
 </div>
 <div id="p" class="section level2">
 <h2>p)</h2>

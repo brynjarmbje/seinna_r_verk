@@ -90,7 +90,7 @@ sample_n(size = 200) -> urtak
 ## h) Búið til töflu sem sýnir fjölda eigna í hverfunum þremur eftir gerð eigna (sérbýli eða fjölbýli).
 
 ```{r}
-bik %>%
+urtak %>%
   count(postnr, tegund) %>%
   spread(key = tegund, value = n)
 ```
@@ -99,7 +99,7 @@ bik %>%
 
 ```{r}
 # Finna fjolda af hverri tegund i hverju  postsnr
-fjoldi <- table(bik$postnr, bik$tegund)
+fjoldi <- table(urtak$postnr, urtak$tegund)
 
 # Hlutfall fjolda
 hlutfall <- prop.table(fjoldi, margin = 1)
@@ -131,8 +131,8 @@ Fyrir ofan sést að prófstærðin er `r chi_test$statistic` og p-gildið `r ch
 
 ```{r}
 # Búum til tvö úrtök, eitt fyrir sérbýli og annað fyrir fjölbýli
-serbýli <- filter(bik, tegund == "Serbyli")$fermetraverd
-fjölbýli <- filter(bik, tegund == "Fjolbyli")$fermetraverd
+serbýli <- filter(urtak, tegund == "Serbyli")$fermetraverd
+fjölbýli <- filter(urtak, tegund == "Fjolbyli")$fermetraverd
 
 # Framkvæmum t-prófið
 t_test_result <- t.test(serbýli, fjölbýli, alternative = "two.sided", var.equal = TRUE)
@@ -168,21 +168,21 @@ Meðaltal fermetraverðs fyrir sérbýli (mean of x) er *374.1030*, og fyrir fj�
 
 
 ```{r}
-bik$staerd200 <- ifelse(bik$einflm >= 200, "Stærri", "Minni")
+urtak$staerd200 <- ifelse(urtak$einflm >= 200, "Stærri", "Minni")
 
 # Skoðum fyrstu færslurnar til að sjá breytingarnar
-head(bik$staerd200)
+head(urtak$staerd200)
 ```
 
 ## m) Kannið með viðeigandi tilgátuprófi hvort munur sé á meðalfermetraverði fasteigna eftir því hvort þær séu stærri eða minni en 200 fermetrar. Setjið tilgáturnar fram, tilgreinið gildið á prófstærðinni, p-gildið og hvaða ályktun þið dragið.
 
 ```{r}
-# Gerum ráð fyrir að bik sé gagnarammi sem inniheldur fermetraverð í dálkinum 'verd' 
+# Gerum ráð fyrir að urtak sé gagnarammi sem inniheldur fermetraverð í dálkinum 'verd' 
 # og flokkun eftir stærð í 'staerd200' dálkinum
 
 # Skiptum gögnunum í tvo hópa
-staerri <- bik$fermetraverd[bik$staerd200 == "Stærri"]
-minni <- bik$fermetraverd[bik$staerd200 == "Minni"]
+staerri <- urtak$fermetraverd[urtak$staerd200 == "Stærri"]
+minni <- urtak$fermetraverd[urtak$staerd200 == "Minni"]
 
 # Framkvæmum t-próf fyrir óháð sýni
 t_test_result2 <- t.test(staerri, minni)
@@ -225,8 +225,28 @@ ggplot(urtak, aes(x=postnr, y=fermetraverd)) +
 ## o)
 Kannið með viðeigandi tilgátuprófi hvort munur sé á meðalfermetraverði fasteigna í hverfunum þremur. Sýnið úttakið úr prófinu. Setjið tilgáturnar fram, tilgreinið gildið á prófstærðinni, p-gildið og hvaða ályktun þið dragið. Segði nokkur orð um hvort forsendur tilgátuprófsins séu uppfylltar. Þið þurfið ekki að prófa það með tilgátuprófi, nóg er að notast við myndrit (t.d. myndina í lið n).
 ```{r}
+fervikagreining <- aov(fermetraverd ~ postnr, data = urtak)
+
+summary_fervik  <- summary(fervikagreining)
+f_value <- summary_fervik[[1]]["postnr", "F value"]
+p_value <- summary_fervik[[1]]["postnr", "Pr(>F)"]
+summary_fervik
 
 ```
+### Núlltilgáta
+Það er enginn munur á meðal fermetraverði í hverfunum.
+
+### Gagntilgáta
+Allavega eitt hverfi hefur öðruvísi meðal fermetraverð en hin hverfin.
+
+### Prófstærð og  p-gildi
+Prófstærðin er F-gildið og það er `r f_value` og p-gildið er `r p_value`
+
+### Ályktun
+Þar sem p-gildið er ekki minna en 0.05 er ekki hægt að hafna núlltilgátunni.
+Þetta þýðir að það er ekki hægt að segja að það sé umtalsverður munur á meðal fermetraverði milli hverfa.
+Miðað við boxplot að ofan þá sést að það eru einhverjir útlagar og einnig er p-gildið nálægt 0.05 sem þýðir að það er  einhver munur en ekki alvveg nógu mikill. Það væri því gott að taka stærra úttak því það gæti gefið niðurstöður sem myndu hafna núlltilgátunni.
+
 
 ## p)
 Teiknið viðeigandi mynd af breytunum einflm og kaupverd. Segið með nokkrum orðum hvort þið teljið viðeigandi að nota einfalt línulegt aðhvarf til að lýsa sambandinu á milli breytanna.
