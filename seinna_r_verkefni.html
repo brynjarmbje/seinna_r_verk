@@ -2015,7 +2015,9 @@ margin-left: 0 !important;
             <li><a href="#hluti-4-30" id="toc-hluti-4-30">Hluti 4
             (30%)</a>
             <ul>
-            <li><a href="#n" id="toc-n">n)</a></li>
+            <li><a href="#n-teiknið-viðeigandi-mynd-af-breytunum-fermetraverd-og-postnr" id="toc-n-teiknið-viðeigandi-mynd-af-breytunum-fermetraverd-og-postnr">n)
+            Teiknið viðeigandi mynd af breytunum fermetraverd og
+            postnr</a></li>
             <li><a href="#o" id="toc-o">o)</a></li>
             <li><a href="#p" id="toc-p">p)</a></li>
             <li><a href="#q" id="toc-q">q)</a></li>
@@ -2167,10 +2169,13 @@ chi_test</code></pre>
 ## 
 ## data:  fjoldi
 ## X-squared = 2412.5, df = 2, p-value &lt; 2.2e-16</code></pre>
-<p>Núlltilgátan er að hlutfall fjölbýla sé það sama í öllum hverfum.
-Gagntilgátan er að hlutfall fjölbýla sé ekki það sama í öllum hverfum.
-Fyri ofan sést að prófstærðin er 2412.4978359 og p-gildið 0. Þar sem
-p-gildið er minna en 0.05 er núlltilgátu hafnað.</p>
+<div id="núlltilgátan" class="section level3">
+<h3>Núlltilgátan</h3>
+<p>er að hlutfall fjölbýla sé það sama í öllum hverfum. ### Gagntilgátan
+er að hlutfall fjölbýla sé ekki það sama í öllum hverfum. ### Prófstærð
+og p-gildi Fyrir ofan sést að prófstærðin er 2412.4978359 og p-gildið 0.
+### Ályktun Þar sem p-gildið er minna en 0.05 er núlltilgátu hafnað.</p>
+</div>
 </div>
 </div>
 <div id="hluti-3---tilgátuprof-25" class="section level1">
@@ -2209,8 +2214,8 @@ sett fram og túlkað tilgáturnar, prófstærðina, p-gildið og dregið
 <li><em>Núlltilgáta (H0):</em> Það er enginn munur á meðalfermetraverði
 milli sérbýla og fjölbýla. <span class="math inline">\(μ_{sérbýli} =
 μ_{fjölbýli}\)</span></li>
-<li><em>Andstæð tilgáta (H1):</em> Það er munur á meðalfermetraverði
-milli sérbýla og fjölbýla. <span class="math inline">\(μ_{sérbýli} ≠
+<li><em>Gagntilgáta (H1):</em> Það er munur á meðalfermetraverði milli
+sérbýla og fjölbýla. <span class="math inline">\(μ_{sérbýli} ≠
 μ_{fjölbýli}\)</span></li>
 </ul>
 </div>
@@ -2272,9 +2277,8 @@ prófstærðinni, p-gildið og hvaða ályktun þið dragið.</h2>
 </div>
 <div id="hluti-4-30" class="section level1">
 <h1>Hluti 4 (30%)</h1>
-<div id="n" class="section level2">
-<h2>n)</h2>
-<p>Teiknið viðeigandi mynd af breytunum fermetraverd og postnr</p>
+<div id="n-teiknið-viðeigandi-mynd-af-breytunum-fermetraverd-og-postnr" class="section level2">
+<h2>n) Teiknið viðeigandi mynd af breytunum fermetraverd og postnr</h2>
 <pre class="r"><code>ggplot(urtak, aes(x=postnr, y=fermetraverd)) +
   geom_boxplot() +
   scale_y_continuous(breaks=seq(0, 1000, by=100), limits=c(0, 1000)) +
