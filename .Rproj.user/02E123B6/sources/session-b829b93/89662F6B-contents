@@ -113,12 +113,17 @@ prosent
 ## j) Kannið með viðeigandi tilgátuprófi hvort hlutfall fjölbýla sé misjafnt í hverfunum þremur. Sýnið úttakið úr prófinu. Eru forsendur til að nota prófið uppfylltar? Setjið tilgáturnar fram, tilgreinið gildið á prófstærðinni, p-gildið og hvaða ályktun þið dragið.
 
 ```{r}
-
+chi_test <- chisq.test(fjoldi)
+chi_test
 ```
+Núlltilgátan er að hlutfall fjölbýla sé það sama í öllum hverfum.
+Gagntilgátan er að hlutfall fjölbýla sé ekki það sama í öllum hverfum.
+Fyri ofan sést að prófstærðin er `r chi_test$statistic` og p-gildið `r chi_test$p.value`.
+Þar sem p-gildið er minna en 0.05 er núlltilgátu hafnað.
 
 # Hluti 3 - Tilgatuprof (25 %)
 
-## i) 
+## k) 
 
 ```{r}
 
