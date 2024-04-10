@@ -83,6 +83,13 @@ group_by(postnr) %>%
 sample_n(size = 200) -> urtak
 ```
 
+# Hluti 2 - Töflur (25 %)
+
+## h) Búið til töflu sem sýnir fjölda eigna í hverfunum þremur eftir gerð eigna (sérbýli eða fjölbýli).
+
+```{r}
+
+```
 
 
 
