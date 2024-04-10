@@ -177,8 +177,38 @@ head(bik$staerd200)
 ## m) Kannið með viðeigandi tilgátuprófi hvort munur sé á meðalfermetraverði fasteigna eftir því hvort þær séu stærri eða minni en 200 fermetrar. Setjið tilgáturnar fram, tilgreinið gildið á prófstærðinni, p-gildið og hvaða ályktun þið dragið.
 
 ```{r}
+# Gerum ráð fyrir að bik sé gagnarammi sem inniheldur fermetraverð í dálkinum 'verd' 
+# og flokkun eftir stærð í 'staerd200' dálkinum
 
+# Skiptum gögnunum í tvo hópa
+staerri <- bik$fermetraverd[bik$staerd200 == "Stærri"]
+minni <- bik$fermetraverd[bik$staerd200 == "Minni"]
+
+# Framkvæmum t-próf fyrir óháð sýni
+t_test_result2 <- t.test(staerri, minni)
+
+# Prentum út niðurstöðurnar
+print(t_test_result2)
 ```
+
+### Tilgáturnar
+- *Núlltilgáta (H0):* Það er enginn munur á meðalfermetraverði milli fasteigna sem eru stærri en 200 fermetrar og þeirra sem eru minni en 200 fermetrar. \[H0: μ_staerri = μ_minni\]
+- *Gagntilgáta (H1):* Það er munur á meðalfermetraverði milli fasteigna sem eru stærri en 200 fermetrar og þeirra sem eru minni en 200 fermetrar. \[H1: μ_staerri ≠ μ_minni\]
+
+### Gildi á prófstærðinni
+Prófstærðin (t-gildi) er *-12.856*, sem gefur til kynna marktækt frávik milli meðalverða tveggja hópa.
+
+### P-gildi
+P-gildið er *< 2.2e-16*, sem er langt undir algenga marktækniþröskuldinum á 0.05. Þetta þýðir að líkurnar á að fá þessar eða meira afgerandi niðurstöður, gefið að núlltilgátan sé rétt, eru mjög lágar.
+
+### 95% Öryggisbil
+95% öryggisbilið fyrir muninn á meðaltölum er frá *-61.41417* til *-45.15346*. Þetta gefur til kynna hversu stór munurinn á meðaltölum hópanna er, og öryggisbilið gefur ekki tilefni til að halda að enginn munur sé (þar sem 0 er ekki innan bilsins).
+
+### Meðaltal
+Meðaltal fasteignaverðs fyrir stærri eignir (mean of x) er *363.1564*, og fyrir minni eignir (mean of y) er *416.4402*.
+
+### Ályktun
+Niðurstöður prófsins leiða í ljós að við höfnum núlltilgátunni (H0) og samþykkjum gagntilgátuna (H1) að það sé marktækur munur á meðalfermetraverði milli fasteigna sem eru stærri eða minni en 200 fermetrar. Með öðrum orðum, fasteignir sem eru minni en 200 fermetrar hafa hærra meðalfermetraverð samanborið við stærri fasteignir. T-gildið og p-gildið staðfesta þennnan marktæka mun, og öryggisbilið veitir frekari upplýsingar um stærð og mismun.
 
 # Hluti 4 (30%)
 
