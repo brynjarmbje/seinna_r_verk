@@ -25,7 +25,7 @@ library(ggplot2)
 library(scales)
 library(knitr)
 ```
-# Hluti 1 - Gagnamöndl (30 %)
+# Hluti 1 - Gagnamöndl (10 %)
 
 ## a)
 Lesið gagnasafnið inn í R/RStudio með skipuninni hér að neðan og geymið í hlut sem ber upphafsstafi þeirra sem verkefnið vinna (ef Gréta Halldórsdóttir og Sigurður Karl Jónsson eru að vinna saman skulu þau nefna hlutinn gs).
@@ -71,3 +71,31 @@ Kannið gerð breytanna í gagnarammanum ykkar og breytið ef þarf.
 ```{r}
 bik <- mutate(bik, emnr = factor(emnr))
 bik <- mutate(bik, postnr = factor(postnr))
+```
+
+## g)
+Hugsum okkur nú að eignirnar í gagnarammanum ykkar sé þýðið ykkar. Nú ætlum við að taka úrtak úr þýðinu, 200 eignir úr hverju hverfi. Það má gera á eftirfarandi hátt:
+
+```{r}
+set.seed(39)
+bik %>% 
+group_by(postnr) %>%
+sample_n(size = 200) -> urtak
+```
+
+# Hluti 2 - Töflur (25 %)
+
+## h) Búið til töflu sem sýnir fjölda eigna í hverfunum þremur eftir gerð eigna (sérbýli eða fjölbýli).
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
