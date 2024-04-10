@@ -1961,7 +1961,7 @@ margin-left: 0 !important;
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a href="#hluti-1---gagnamöndl-30" id="toc-hluti-1---gagnamöndl-30">Hluti 1 - Gagnamöndl (30
+            <li><a href="#hluti-1---gagnamöndl-10" id="toc-hluti-1---gagnamöndl-10">Hluti 1 - Gagnamöndl (10
             %)</a>
             <ul>
             <li><a href="#a" id="toc-a">a)</a></li>
@@ -1970,6 +1970,13 @@ margin-left: 0 !important;
             <li><a href="#d" id="toc-d">d)</a></li>
             <li><a href="#e" id="toc-e">e)</a></li>
             <li><a href="#f" id="toc-f">f)</a></li>
+            <li><a href="#g" id="toc-g">g)</a></li>
+            </ul></li>
+            <li><a href="#hluti-2---töflur-25" id="toc-hluti-2---töflur-25">Hluti 2 - Töflur (25 %)</a>
+            <ul>
+            <li><a href="#h-búið-til-töflu-sem-sýnir-fjölda-eigna-í-hverfunum-þremur-eftir-gerð-eigna-sérbýli-eða-fjölbýli." id="toc-h-búið-til-töflu-sem-sýnir-fjölda-eigna-í-hverfunum-þremur-eftir-gerð-eigna-sérbýli-eða-fjölbýli.">h)
+            Búið til töflu sem sýnir fjölda eigna í hverfunum þremur
+            eftir gerð eigna (sérbýli eða fjölbýli).</a></li>
             </ul></li>
             </ul>
           </div>
@@ -2005,9 +2012,11 @@ margin-left: 0 !important;
 <pre class="r"><code>library(tidyverse)
 library(ggplot2)
 library(scales)
-library(knitr)</code></pre>
-<div id="hluti-1---gagnamöndl-30" class="section level1">
-<h1>Hluti 1 - Gagnamöndl (30 %)</h1>
+library(knitr)
+library(dplyr)
+library(tidyr)</code></pre>
+<div id="hluti-1---gagnamöndl-10" class="section level1">
+<h1>Hluti 1 - Gagnamöndl (10 %)</h1>
 <div id="a" class="section level2">
 <h2>a)</h2>
 <p>Lesið gagnasafnið inn í R/RStudio með skipuninni hér að neðan og
@@ -2057,6 +2066,37 @@ bik &lt;- filter(bik, postnr%in%pnr)</code></pre>
 <p>Kannið gerð breytanna í gagnarammanum ykkar og breytið ef þarf.</p>
 <pre class="r"><code>bik &lt;- mutate(bik, emnr = factor(emnr))
 bik &lt;- mutate(bik, postnr = factor(postnr))</code></pre>
+</div>
+<div id="g" class="section level2">
+<h2>g)</h2>
+<p>Hugsum okkur nú að eignirnar í gagnarammanum ykkar sé þýðið ykkar. Nú
+ætlum við að taka úrtak úr þýðinu, 200 eignir úr hverju hverfi. Það má
+gera á eftirfarandi hátt:</p>
+<pre class="r"><code>set.seed(39)
+bik %&gt;% 
+group_by(postnr) %&gt;%
+sample_n(size = 200) -&gt; urtak</code></pre>
+</div>
+</div>
+<div id="hluti-2---töflur-25" class="section level1">
+<h1>Hluti 2 - Töflur (25 %)</h1>
+<div id="h-búið-til-töflu-sem-sýnir-fjölda-eigna-í-hverfunum-þremur-eftir-gerð-eigna-sérbýli-eða-fjölbýli." class="section level2">
+<h2>h) Búið til töflu sem sýnir fjölda eigna í hverfunum þremur eftir
+gerð eigna (sérbýli eða fjölbýli).</h2>
+<pre class="r"><code># Assuming your dataframe is named bik and 
+# you have a column `eignategund` that specifies the property type (e.g., &#39;sérbýli&#39; or &#39;fjölbýli&#39;)
+
+# Replace `eignategund` with the actual column name that contains the property type
+
+bik %&gt;%
+  count(postnr, tegund) %&gt;%
+  spread(key = tegund, value = n)</code></pre>
+<pre><code>## # A tibble: 3 × 3
+##   postnr Fjolbyli Serbyli
+##   &lt;fct&gt;     &lt;int&gt;   &lt;int&gt;
+## 1 105        7575     208
+## 2 107        3592     184
+## 3 210        3499    1478</code></pre>
 </div>
 </div>
 </div>

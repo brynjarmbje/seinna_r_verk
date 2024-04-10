@@ -24,6 +24,8 @@ library(tidyverse)
 library(ggplot2)
 library(scales)
 library(knitr)
+library(dplyr)
+library(tidyr)
 ```
 # Hluti 1 - Gagnamöndl (10 %)
 
@@ -88,7 +90,9 @@ sample_n(size = 200) -> urtak
 ## h) Búið til töflu sem sýnir fjölda eigna í hverfunum þremur eftir gerð eigna (sérbýli eða fjölbýli).
 
 ```{r}
-
+bik %>%
+  count(postnr, tegund) %>%
+  spread(key = tegund, value = n)
 ```
 
 
