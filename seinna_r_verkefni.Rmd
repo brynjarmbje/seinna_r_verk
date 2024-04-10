@@ -95,7 +95,57 @@ bik %>%
   spread(key = tegund, value = n)
 ```
 
+## i) Búið til töflu sem sýnir hlutfall sérbýla og fjölbýla í hverfunum þremur. Það á s.s. að vera hægt að lesa hvert hlutfall sérbýla og fjölbýla er í hverju hverfi fyrir sig. 
 
+```{r}
+# Finna fjolda af hverri tegund i hverju  postsnr
+fjoldi <- table(bik$postnr, bik$tegund)
+
+# Hlutfall fjolda
+hlutfall <- prop.table(fjoldi, margin = 1)
+
+#  Yfir  i %
+prosent <- round(hlutfall * 100, digits = 2)
+
+prosent
+```
+
+## j) Kannið með viðeigandi tilgátuprófi hvort hlutfall fjölbýla sé misjafnt í hverfunum þremur. Sýnið úttakið úr prófinu. Eru forsendur til að nota prófið uppfylltar? Setjið tilgáturnar fram, tilgreinið gildið á prófstærðinni, p-gildið og hvaða ályktun þið dragið.
+
+```{r}
+chi_test <- chisq.test(fjoldi)
+chi_test
+```
+Núlltilgátan er að hlutfall fjölbýla sé það sama í öllum hverfum.
+Gagntilgátan er að hlutfall fjölbýla sé ekki það sama í öllum hverfum.
+Fyri ofan sést að prófstærðin er `r chi_test$statistic` og p-gildið `r chi_test$p.value`.
+Þar sem p-gildið er minna en 0.05 er núlltilgátu hafnað.
+
+# Hluti 3 - Tilgatuprof (25 %)
+
+## k) 
+
+```{r}
+
+```
+
+## i) 
+
+```{r}
+
+```
+
+## i) 
+
+```{r}
+
+```
+
+## i) 
+
+```{r}
+
+```
 
 
 

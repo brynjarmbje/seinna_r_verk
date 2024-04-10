@@ -2144,10 +2144,8 @@ chi_test</code></pre>
 ## 
 ## data:  fjoldi
 ## X-squared = 2412.5, df = 2, p-value &lt; 2.2e-16</code></pre>
-<p>Núlltilgátan er að hlutfall fjölbýla sé það sama í öllum hverfum.
-Gagntilgátan er að hlutfall fjölbýla sé ekki það sama í öllum hverfum.
-Fyri ofan sést að prófstærðin er 2412.4978359 og p-gildið 0. Þar sem
-p-gildið er minna en 0.05 er núlltilgátu hafnað.</p>
+<p>Núlltilgátan er að hlutfallið sé það sama í öllum hverfum. Fyri ofan
+sést að prófstærðin er 2412.4978359.</p>
 </div>
 </div>
 <div id="hluti-3---tilgatuprof-25" class="section level1">
