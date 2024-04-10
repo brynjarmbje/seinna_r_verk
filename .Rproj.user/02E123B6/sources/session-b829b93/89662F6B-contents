@@ -121,32 +121,62 @@ Gagntilgátan er að hlutfall fjölbýla sé ekki það sama í öllum hverfum.
 Fyri ofan sést að prófstærðin er `r chi_test$statistic` og p-gildið `r chi_test$p.value`.
 Þar sem p-gildið er minna en 0.05 er núlltilgátu hafnað.
 
-# Hluti 3 - Tilgatuprof (25 %)
+# Hluti 3 - Tilgátuprof (25 %)
 
-## k) 
+## k) Kannið með viðeigandi tilgátuprófi hvort munur sé á meðalfermetraverði fasteigna eftir því hvort þær séu sérbýli eða fjölbýli. Setjið tilgáturnar fram, tilgreinið gildið á prófstærðinni, p-gildið og hvaða ályktun þið dragið.
+
+```{r}
+
+
+# Búum til tvö úrtök, eitt fyrir sérbýli og annað fyrir fjölbýli
+serbýli <- filter(bik, tegund == "Serbyli")$fermetraverd
+fjölbýli <- filter(bik, tegund == "Fjolbyli")$fermetraverd
+
+# Framkvæmum t-prófið
+t_test_result <- t.test(serbýli, fjölbýli, alternative = "two.sided", var.equal = TRUE)
+
+# Prentum út niðurstöðurnar
+print(t_test_result)
+```
+
+Út frá niðurstöðunum úr t-prófinu sem hefur verið framkvæmt getum við sett fram og túlkað tilgáturnar, prófstærðina, p-gildið og dregið ályktanir.
+
+### Tilgáturnar
+- *Núlltilgáta (H0):* Það er enginn munur á meðalfermetraverði milli sérbýla og fjölbýla. \(μ_{sérbýli} = μ_{fjölbýli}\)
+- *Andstæð tilgáta (H1):* Það er munur á meðalfermetraverði milli sérbýla og fjölbýla. \(μ_{sérbýli} ≠ μ_{fjölbýli}\)
+
+### Gildi á prófstærðinni
+Prófstærðin (t-gildið) er *-11.6*. Þetta talar um styrk sambandsins milli hópanna; í þessu tilviki, hversu mikill munur er á meðaltölum hópanna í samanburði við staðalfrávikin.
+
+### P-gildi
+P-gildið er *minna en 2.2e-16*, sem er mun minna en algengt markmið fyrir marktækni á 0.05 (5% líkur). Þetta þýðir að líkurnar á að fá þessar eða meira öfgameiri niðurstöður, gefið að núlltilgátan sé rétt, eru mjög lágar.
+
+### 95% Öryggisbil
+95% öryggisbil fyrir muninn á meðaltölum er frá *-50.76019* til *-36.08557*. Þetta þýðir að við getum verið 95% viss um að raunverulegur munur á meðalfermetraverði milli sérbýla og fjölbýla liggi innan þessa bils. Athugið að öryggisbilið inniheldur ekki núllið, sem styður við marktækan mun.
+
+### Sample Estimates
+Meðaltal fermetraverðs fyrir sérbýli (mean of x) er *374.1030*, og fyrir fjölbýli (mean of y) er *417.5259*.
+
+### Ályktun
+Þar sem p-gildið er mjög lágt (minna en 2.2e-16), höfnum við núlltilgátunni og ályktum að marktækur munur sé á meðalfermetraverði milli sérbýla og fjölbýla. Gögnin benda til þess að meðalfermetraverð sé lægra fyrir sérbýli en fyrir fjölbýli, með marktækum mun. T-gildið og öryggisbilið gefa okkur frekari upplýsingar um stærð og átt þessa munar.
+
+
+## l) Búið til nýja breytu, staerd200, sem gefur til kynna hvort eignir séu stærri eða minni en 200 fermetrar (það skiptir ekki máli í hvorum flokknum 200 fermetra eignir lenda).  Kallið flokkinn með stærri eignunum Stærri og minni eignunum Minni. Ábending: notið ifelse() til að búa til breytuna.
+
+
+
+```{r}
+bik$staerd200 <- ifelse(bik$einflm >= 200, "Stærri", "Minni")
+
+# Skoðum fyrstu færslurnar til að sjá breytingarnar
+head(bik$staerd200)
+```
+
+## m) Kannið með viðeigandi tilgátuprófi hvort munur sé á meðalfermetraverði fasteigna eftir því hvort þær séu stærri eða minni en 200 fermetrar. Setjið tilgáturnar fram, tilgreinið gildið á prófstærðinni, p-gildið og hvaða ályktun þið dragið.
 
 ```{r}
 
 ```
-
-## i) 
-
-```{r}
-
-```
-
-## i) 
-
-```{r}
-
-```
-
-## i) 
-
-```{r}
-
-```
-
 
 # Hluti 4 (30%)
 
