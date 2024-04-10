@@ -1,0 +1,5 @@
+"0","ggplot(urtak, aes(x=einflm, y=kaupverd)) +"
+"0","  geom_point() +  # Use geom_point for scatter plots"
+"0","  labs(title=""Samband milli einingarflatarmáls og kaupverðs"","
+"0","       x=""Einingarflatarmál (einflm)"","
+"0","       y=""Kaupverð"")"
