@@ -148,7 +148,43 @@ Fyri ofan sést að prófstærðin er `r chi_test$statistic` og p-gildið `r chi
 ```
 
 
+# Hluti 4 (30%)
 
+## n)
+Teiknið viðeigandi mynd af breytunum fermetraverd og postnr
+```{r}
+ggplot(urtak, aes(x=postnr, y=fermetraverd)) +
+  geom_boxplot() +
+  scale_y_continuous(breaks=seq(0, 1000, by=100), limits=c(0, 1000)) +
+  labs(title="Samband milli fermetraverðs og póstnúmers",
+       x="Póstnúmer",
+       y="Fermetraverð")
+```
+
+## o)
+Kannið með viðeigandi tilgátuprófi hvort munur sé á meðalfermetraverði fasteigna í hverfunum þremur. Sýnið úttakið úr prófinu. Setjið tilgáturnar fram, tilgreinið gildið á prófstærðinni, p-gildið og hvaða ályktun þið dragið. Segði nokkur orð um hvort forsendur tilgátuprófsins séu uppfylltar. Þið þurfið ekki að prófa það með tilgátuprófi, nóg er að notast við myndrit (t.d. myndina í lið n).
+```{r}
+
+```
+
+## p)
+Teiknið viðeigandi mynd af breytunum einflm og kaupverd. Segið með nokkrum orðum hvort þið teljið viðeigandi að nota einfalt línulegt aðhvarf til að lýsa sambandinu á milli breytanna.
+```{r}
+ggplot(urtak, aes(x=einflm, y=kaupverd)) +
+  geom_point() +  # Use geom_point for scatter plots
+  labs(title="Samband milli einingarflatarmáls og kaupverðs",
+       x="Einingarflatarmál (einflm)",
+       y="Kaupverð")
+```
+
+Miðað við greinilegan breytileika í tengslum milli einingarflatarmáls og kaupverðs, virðist vera að einföld línuleg greining gæti ekki dugað til að fanga alla flækjustigið í þessu sambandi. Þetta bendir til þess að þótt viss grundvallartengsl séu til staðar, gætu aðrir þættir eða ólínulegar tengingar einnig spilað stórt hlutverk í að ákvarða kaupverð. Nánari könnun á gögnunum með tilliti til aukabreyta eða flóknari líkana gæti verið nauðsynleg til að fá heildstæðari skilning á þessum tengslum.
+
+
+## q)
+Smíðið einfalt aðhvarfslíkan sem lýsir sambandi stærðar og kaupverðs eigna. Með líkaninu á að vera hægt að spá fyrir um kaupverð úr frá stærð. Tilgreinið í texta hvert matið á skurðpunktinum og hallatölunni eru ásamt skýringarhlutfallinu (notið klumpakommur). Segið í örfáum orðum hvað hallatalan segir okkur í þessu tilviki.
+```{r}
+
+```
 
 
 
