@@ -1,4 +1,0 @@
-"0","set.seed(39)"
-"0","bik %>% "
-"0","group_by(postnr) %>%"
-"0","sample_n(size = 200) -> urtak"

@@ -1,3 +1,0 @@
-"0","bik %>%"
-"0","  count(postnr, tegund) %>%"
-"0","  spread(key = tegund, value = n)"
