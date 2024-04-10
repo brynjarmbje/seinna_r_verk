@@ -116,9 +116,13 @@ prosent
 chi_test <- chisq.test(fjoldi)
 chi_test
 ```
-Núlltilgátan er að hlutfall fjölbýla sé það sama í öllum hverfum.
-Gagntilgátan er að hlutfall fjölbýla sé ekki það sama í öllum hverfum.
-Fyri ofan sést að prófstærðin er `r chi_test$statistic` og p-gildið `r chi_test$p.value`.
+### Núlltilgátan
+er að hlutfall fjölbýla sé það sama í öllum hverfum.
+### Gagntilgátan
+er að hlutfall fjölbýla sé ekki það sama í öllum hverfum.
+### Prófstærð og p-gildi
+Fyrir ofan sést að prófstærðin er `r chi_test$statistic` og p-gildið `r chi_test$p.value`.
+### Ályktun
 Þar sem p-gildið er minna en 0.05 er núlltilgátu hafnað.
 
 # Hluti 3 - Tilgátuprof (25 %)
@@ -126,8 +130,6 @@ Fyri ofan sést að prófstærðin er `r chi_test$statistic` og p-gildið `r chi
 ## k) Kannið með viðeigandi tilgátuprófi hvort munur sé á meðalfermetraverði fasteigna eftir því hvort þær séu sérbýli eða fjölbýli. Setjið tilgáturnar fram, tilgreinið gildið á prófstærðinni, p-gildið og hvaða ályktun þið dragið.
 
 ```{r}
-
-
 # Búum til tvö úrtök, eitt fyrir sérbýli og annað fyrir fjölbýli
 serbýli <- filter(bik, tegund == "Serbyli")$fermetraverd
 fjölbýli <- filter(bik, tegund == "Fjolbyli")$fermetraverd
@@ -143,7 +145,7 @@ print(t_test_result)
 
 ### Tilgáturnar
 - *Núlltilgáta (H0):* Það er enginn munur á meðalfermetraverði milli sérbýla og fjölbýla. \(μ_{sérbýli} = μ_{fjölbýli}\)
-- *Andstæð tilgáta (H1):* Það er munur á meðalfermetraverði milli sérbýla og fjölbýla. \(μ_{sérbýli} ≠ μ_{fjölbýli}\)
+- *Gagntilgáta (H1):* Það er munur á meðalfermetraverði milli sérbýla og fjölbýla. \(μ_{sérbýli} ≠ μ_{fjölbýli}\)
 
 ### Gildi á prófstærðinni
 Prófstærðin (t-gildið) er *-11.6*. Þetta talar um styrk sambandsins milli hópanna; í þessu tilviki, hversu mikill munur er á meðaltölum hópanna í samanburði við staðalfrávikin.
@@ -180,8 +182,7 @@ head(bik$staerd200)
 
 # Hluti 4 (30%)
 
-## n)
-Teiknið viðeigandi mynd af breytunum fermetraverd og postnr
+## n) Teiknið viðeigandi mynd af breytunum fermetraverd og postnr
 ```{r}
 ggplot(urtak, aes(x=postnr, y=fermetraverd)) +
   geom_boxplot() +
