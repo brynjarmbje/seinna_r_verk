@@ -2273,6 +2273,77 @@ head(bik$staerd200)</code></pre>
 meðalfermetraverði fasteigna eftir því hvort þær séu stærri eða minni en
 200 fermetrar. Setjið tilgáturnar fram, tilgreinið gildið á
 prófstærðinni, p-gildið og hvaða ályktun þið dragið.</h2>
+<pre class="r"><code># Gerum ráð fyrir að bik sé gagnarammi sem inniheldur fermetraverð í dálkinum &#39;verd&#39; 
+# og flokkun eftir stærð í &#39;staerd200&#39; dálkinum
+
+# Skiptum gögnunum í tvo hópa
+staerri &lt;- bik$fermetraverd[bik$staerd200 == &quot;Stærri&quot;]
+minni &lt;- bik$fermetraverd[bik$staerd200 == &quot;Minni&quot;]
+
+# Framkvæmum t-próf fyrir óháð sýni
+t_test_result2 &lt;- t.test(staerri, minni)
+
+# Prentum út niðurstöðurnar
+print(t_test_result2)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  staerri and minni
+## t = -12.856, df = 1429.6, p-value &lt; 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -61.41417 -45.15346
+## sample estimates:
+## mean of x mean of y 
+##  363.1564  416.4402</code></pre>
+<div id="tilgáturnar-1" class="section level3">
+<h3>Tilgáturnar</h3>
+<ul>
+<li><em>Núlltilgáta (H0):</em> Það er enginn munur á meðalfermetraverði
+milli fasteigna sem eru stærri en 200 fermetrar og þeirra sem eru minni
+en 200 fermetrar. <span class="math display">\[H0: μ_staerri =
+μ_minni\]</span></li>
+<li><em>Gagntilgáta (H1):</em> Það er munur á meðalfermetraverði milli
+fasteigna sem eru stærri en 200 fermetrar og þeirra sem eru minni en 200
+fermetrar. <span class="math display">\[H1: μ_staerri ≠
+μ_minni\]</span></li>
+</ul>
+</div>
+<div id="gildi-á-prófstærðinni-1" class="section level3">
+<h3>Gildi á prófstærðinni</h3>
+<p>Prófstærðin (t-gildi) er <em>-12.856</em>, sem gefur til kynna
+marktækt frávik milli meðalverða tveggja hópa.</p>
+</div>
+<div id="p-gildi-1" class="section level3">
+<h3>P-gildi</h3>
+<p>P-gildið er <em>&lt; 2.2e-16</em>, sem er langt undir algenga
+marktækniþröskuldinum á 0.05. Þetta þýðir að líkurnar á að fá þessar eða
+meira afgerandi niðurstöður, gefið að núlltilgátan sé rétt, eru mjög
+lágar.</p>
+</div>
+<div id="öryggisbil-1" class="section level3">
+<h3>95% Öryggisbil</h3>
+<p>95% öryggisbilið fyrir muninn á meðaltölum er frá <em>-61.41417</em>
+til <em>-45.15346</em>. Þetta gefur til kynna hversu stór munurinn á
+meðaltölum hópanna er, og öryggisbilið gefur ekki tilefni til að halda
+að enginn munur sé (þar sem 0 er ekki innan bilsins).</p>
+</div>
+<div id="meðaltal" class="section level3">
+<h3>Meðaltal</h3>
+<p>Meðaltal fasteignaverðs fyrir stærri eignir (mean of x) er
+<em>363.1564</em>, og fyrir minni eignir (mean of y) er
+<em>416.4402</em>.</p>
+</div>
+<div id="ályktun-1" class="section level3">
+<h3>Ályktun</h3>
+<p>Niðurstöður prófsins leiða í ljós að við höfnum núlltilgátunni (H0)
+og samþykkjum gagntilgátuna (H1) að það sé marktækur munur á
+meðalfermetraverði milli fasteigna sem eru stærri eða minni en 200
+fermetrar. Með öðrum orðum, fasteignir sem eru minni en 200 fermetrar
+hafa hærra meðalfermetraverð samanborið við stærri fasteignir. T-gildið
+og p-gildið staðfesta þennnan marktæka mun, og öryggisbilið veitir
+frekari upplýsingar um stærð og mismun.</p>
+</div>
 </div>
 </div>
 <div id="hluti-4-30" class="section level1">
