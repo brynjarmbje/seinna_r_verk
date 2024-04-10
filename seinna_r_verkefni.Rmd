@@ -1,0 +1,73 @@
+---
+title: "Verkefni 2"
+author: 
+  - name: "Brynjar Mar (bmb23), Kári Einarsson (kae44) og Indriði Már Indriðason (imi2)" 
+    title: Developers
+date: "`r Sys.Date()`"
+output:
+  rmdformats::downcute:
+    downcute_theme: "chaos"
+    code_folding: show
+    self_contained: true
+    thumbnails: false
+    lightbox: true
+pkgdown:
+  as_is: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = FALSE, warning = F, message = F)
+```
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(scales)
+library(knitr)
+```
+# Hluti 1 - Gagnamöndl (30 %)
+
+## a)
+Lesið gagnasafnið inn í R/RStudio með skipuninni hér að neðan og geymið í hlut sem ber upphafsstafi þeirra sem verkefnið vinna (ef Gréta Halldórsdóttir og Sigurður Karl Jónsson eru að vinna saman skulu þau nefna hlutinn gs).
+
+nafn_a_hlut <- read_csv2("https://ahj.hi.is/kaupskra.csv", locale = locale(encoding = "ISO8859-1"))
+
+þar sem þið skiptið nafn_a_hlut út fyrir upphafsstafina (þó skal ekki nota íslenska stafi).
+```{r}
+bik <- read_csv2("https://ahj.hi.is/kaupskra.csv", locale = locale(encoding = "ISO8859-1"))
+```
+medaltal taknad med $\mu$
+
+## b)
+Notið filter() skipunina til að velja fullbúnar eignir (sjá fullbuid breytuna) sem eru "Fjolbyli" og "Serbyli" og byggja á  samningum sem eru er nothæfir. Yfirskrifið stóra gagnaramman í a) lið með þessum eignum.
+```{r}
+tegund_inni <- c("Serbyli", "Fjolbyli")
+bik <- filter(bik, fullbuid==1, tegund%in%tegund_inni, onothaefur_samningur==0)
+```
+
+
+
+## c)
+Búið til nýja breytu í gagnarammanum ykkar sem inniheldur fermetraverð eignanna, nefnið breytuna fermetraverd.
+```{r}
+bik <- mutate(bik, fermetraverd=kaupverd/einflm)
+```
+
+## d)
+Búið til nýja breytu í gagnarammanum ykkar sem inniheldur árið sem eignin var seld, nefnið breytuna ar (t.d. með að nota year() fallið í lubridate pakkanum).
+```{r}
+bik <- mutate(bik, ar=year(utgdag))
+```
+
+## e)
+Veljið ykkur þrjú póstnúmer til að vinna með. Það þurfa að vera a.m.k. 200 sérbýli í hverju póstúmeri fyrir sig. Yfirskrifið gagnaramman í b) lið með eignum úr þessum þremur póstnúmerum. Þið skulið nota þennan gagnaramma í verkefninu.
+```{r}
+pnr <- c(107, 105, 210)
+bik <- filter(bik, postnr%in%pnr)
+```
+
+## f)
+Kannið gerð breytanna í gagnarammanum ykkar og breytið ef þarf.  
+```{r}
+bik <- mutate(bik, emnr = factor(emnr))
+bik <- mutate(bik, postnr = factor(postnr))

@@ -1,0 +1,2 @@
+"0","tegund_inni <- c(""Serbyli"", ""Fjolbyli"")"
+"0","bik <- filter(bik, fullbuid==1, tegund%in%tegund_inni, onothaefur_samningur==0)"

@@ -1,0 +1,2 @@
+"0","bik <- mutate(bik, emnr = factor(emnr))"
+"0","bik <- mutate(bik, postnr = factor(postnr))"

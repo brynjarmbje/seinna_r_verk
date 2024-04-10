@@ -1,0 +1,2 @@
+"0","pnr <- c(107, 105, 210)"
+"0","bik <- filter(bik, postnr%in%pnr)"
