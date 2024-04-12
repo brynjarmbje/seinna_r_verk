@@ -140,31 +140,34 @@ t_test_result <- t.test(serbýli, fjölbýli, alternative = "two.sided", var.equ
 # Prentum út niðurstöðurnar
 print(t_test_result)
 ```
-
-Út frá niðurstöðunum úr t-prófinu sem hefur verið framkvæmt getum við sett fram og túlkað tilgáturnar, prófstærðina, p-gildið og dregið ályktanir.
-
 ### Tilgáturnar
+
 - *Núlltilgáta (H0):* Það er enginn munur á meðalfermetraverði milli sérbýla og fjölbýla. \(μ_{sérbýli} = μ_{fjölbýli}\)
 - *Gagntilgáta (H1):* Það er munur á meðalfermetraverði milli sérbýla og fjölbýla. \(μ_{sérbýli} ≠ μ_{fjölbýli}\)
 
-### Gildi á prófstærðinni
-Prófstærðin (t-gildið) er *-11.6*. Þetta talar um styrk sambandsins milli hópanna; í þessu tilviki, hversu mikill munur er á meðaltölum hópanna í samanburði við staðalfrávikin.
+### Prófstærðin
+
+- *t-gildi:* `r round(t_test_result$statistic[1], 4)` . Þetta gildi segir okkur um styrk sambandsins milli hópanna; neikvætt gildi bendir til þess að meðaltal sérbýlisins sé lægra en meðaltal fjölbýlisins.
 
 ### P-gildi
-P-gildið er *minna en 2.2e-16*, sem er mun minna en algengt markmið fyrir marktækni á 0.05 (5% líkur). Þetta þýðir að líkurnar á að fá þessar eða meira öfgameiri niðurstöður, gefið að núlltilgátan sé rétt, eru mjög lágar.
+
+- *P-gildi:* `r round(t_test_result$p.value,6)`. Þetta er líkurnar á að fá jafn mikinn eða meiri mun á meðaltölum úrtakanna, gefið að núlltilgátan sé rétt. Þar sem p-gildið er minna en 0.05, höfnum við núlltilgátunni á 5% marktækniþröskuldi.
 
 ### 95% Öryggisbil
-95% öryggisbil fyrir muninn á meðaltölum er frá *-50.76019* til *-36.08557*. Þetta þýðir að við getum verið 95% viss um að raunverulegur munur á meðalfermetraverði milli sérbýla og fjölbýla liggi innan þessa bils. Athugið að öryggisbilið inniheldur ekki núllið, sem styður við marktækan mun.
+
+- *Öryggisbil:* Frá `r round(t_test_result$conf.int[1],4)` til `r round(t_test_result$conf.int[2],4)`. Þetta gefur til kynna hversu mikill munurinn á meðalverðum hópanna er, með 95% vissu.
 
 ### Sample Estimates
-Meðaltal fermetraverðs fyrir sérbýli (mean of x) er *374.1030*, og fyrir fjölbýli (mean of y) er *417.5259*.
+
+- *Meðaltal sérbýlis (mean of x):* `r round(t_test_result$estimate[1],4)`.
+- *Meðaltal fjölbýlis (mean of y):* `r round(t_test_result$estimate[2],4)`. 
 
 ### Ályktun
-Þar sem p-gildið er mjög lágt (minna en 2.2e-16), höfnum við núlltilgátunni og ályktum að marktækur munur sé á meðalfermetraverði milli sérbýla og fjölbýla. Gögnin benda til þess að meðalfermetraverð sé lægra fyrir sérbýli en fyrir fjölbýli, með marktækum mun. T-gildið og öryggisbilið gefa okkur frekari upplýsingar um stærð og átt þessa munar.
+
+Niðurstöður prófsins leiða í ljós að við getum höfnun núlltilgátunni og samþykkt gagntilgátuna að það sé marktækur munur á meðalfermetraverði milli sérbýla og fjölbýla. Meðalfermetraverð sérbýlis er marktækt lægra en meðalfermetraverð fjölbýlis, sem sýnt er með neikvæðu t-gildinu og því að p-gildið er undir 0.05. Þetta þýðir að sérbýli eru að meðaltali ódýrari en fjölbýli miðað við fermetraverð.
 
 
 ## l) Búið til nýja breytu, staerd200, sem gefur til kynna hvort eignir séu stærri eða minni en 200 fermetrar (það skiptir ekki máli í hvorum flokknum 200 fermetra eignir lenda).  Kallið flokkinn með stærri eignunum Stærri og minni eignunum Minni. Ábending: notið ifelse() til að búa til breytuna.
-
 
 
 ```{r}
@@ -173,11 +176,10 @@ urtak$staerd200 <- ifelse(urtak$einflm >= 200, "Stærri", "Minni")
 # Skoðum fyrstu færslurnar til að sjá breytingarnar
 head(urtak$staerd200)
 ```
-
 ## m) Kannið með viðeigandi tilgátuprófi hvort munur sé á meðalfermetraverði fasteigna eftir því hvort þær séu stærri eða minni en 200 fermetrar. Setjið tilgáturnar fram, tilgreinið gildið á prófstærðinni, p-gildið og hvaða ályktun þið dragið.
 
 ```{r}
-# Gerum ráð fyrir að urtak sé gagnarammi sem inniheldur fermetraverð í dálkinum 'verd' 
+# Gerum ráð fyrir að bik sé gagnarammi sem inniheldur fermetraverð í dálkinum 'verd' 
 # og flokkun eftir stærð í 'staerd200' dálkinum
 
 # Skiptum gögnunum í tvo hópa
@@ -190,25 +192,31 @@ t_test_result2 <- t.test(staerri, minni)
 # Prentum út niðurstöðurnar
 print(t_test_result2)
 ```
-
 ### Tilgáturnar
-- *Núlltilgáta (H0):* Það er enginn munur á meðalfermetraverði milli fasteigna sem eru stærri en 200 fermetrar og þeirra sem eru minni en 200 fermetrar. \[H0: μ_staerri = μ_minni\]
-- *Gagntilgáta (H1):* Það er munur á meðalfermetraverði milli fasteigna sem eru stærri en 200 fermetrar og þeirra sem eru minni en 200 fermetrar. \[H1: μ_staerri ≠ μ_minni\]
 
-### Gildi á prófstærðinni
-Prófstærðin (t-gildi) er *-12.856*, sem gefur til kynna marktækt frávik milli meðalverða tveggja hópa.
+- *Núlltilgáta (H0):* Það er enginn munur á meðalfermetraverði milli fasteigna sem eru stærri en 200 fermetrar og þeirra sem eru minni en 200 fermetrar. \[μ_{stærri} = μ_{minni}\]
+- *Gagntilgáta (H1):* Það er munur á meðalfermetraverði milli fasteigna sem eru stærri en 200 fermetrar og þeirra sem eru minni en 200 fermetrar. \[μ_{stærri} ≠ μ_{minni}\]
+
+### Prófstærðin
+
+- *t-gildi:* r round(t_test_result2$statistic,4). Prófstærðin bendir til þess að meðalverð stærri eigna er lægra en meðalverð minni eigna, miðað við að t-gildið er neikvætt.
 
 ### P-gildi
-P-gildið er *< 2.2e-16*, sem er langt undir algenga marktækniþröskuldinum á 0.05. Þetta þýðir að líkurnar á að fá þessar eða meira afgerandi niðurstöður, gefið að núlltilgátan sé rétt, eru mjög lágar.
+
+- *P-gildi:* r t_test_result2$p.value Þar sem p-gildið er mun minna en 0.05, höfnum við núlltilgátunni um að enginn munur sé á meðalfermetraverði eigna eftir stærð.
 
 ### 95% Öryggisbil
-95% öryggisbilið fyrir muninn á meðaltölum er frá *-61.41417* til *-45.15346*. Þetta gefur til kynna hversu stór munurinn á meðaltölum hópanna er, og öryggisbilið gefur ekki tilefni til að halda að enginn munur sé (þar sem 0 er ekki innan bilsins).
 
-### Meðaltal
-Meðaltal fasteignaverðs fyrir stærri eignir (mean of x) er *363.1564*, og fyrir minni eignir (mean of y) er *416.4402*.
+- *95% öryggisbil fyrir muninn á meðaltölum:* Frá `r round(t_test_result2$conf.int[1],5)` til `r round(t_test_result2$conf.int[2],5)`. Þetta sýnir okkur að með mikilli vissu er meðalverð stærri eigna lægra en meðalverð minni eigna, og að munurinn liggur einhvers staðar á milli þessara tveggja gilda.
+
+### Sample Estimates
+
+- *Meðaltal stærri eigna (mean of x):* r round(t_test_result2$estimate[1],4).
+- *Meðaltal minni eigna (mean of y):* r round(t_test_result2$estimate[2],4).
 
 ### Ályktun
-Niðurstöður prófsins leiða í ljós að við höfnum núlltilgátunni (H0) og samþykkjum gagntilgátuna (H1) að það sé marktækur munur á meðalfermetraverði milli fasteigna sem eru stærri eða minni en 200 fermetrar. Með öðrum orðum, fasteignir sem eru minni en 200 fermetrar hafa hærra meðalfermetraverð samanborið við stærri fasteignir. T-gildið og p-gildið staðfesta þennnan marktæka mun, og öryggisbilið veitir frekari upplýsingar um stærð og mismun.
+
+Niðurstöður t-prófsins leiða í ljós að það er marktækur munur er á meðalfermetraverði milli fasteigna sem eru stærri eða minni en 200 fermetrar. Meðaltalið af fermetraverði stærri eigna er lægra en meðaltalið af fermetraverði minni eigna. T-gildið og p-gildið gefa til kynna að þessi munur sé tölfræðilega marktækur. Því getum við ályktað að stærð eigna hafi áhrif á fermetraverð, þar sem minni eignir virðast hafa hærra meðalfermetraverð í þessu úrtaki.
 
 # Hluti 4 (30%)
 
@@ -263,9 +271,30 @@ Miðað við greinilegan breytileika í tengslum milli einingarflatarmáls og ka
 
 ## q)
 Smíðið einfalt aðhvarfslíkan sem lýsir sambandi stærðar og kaupverðs eigna. Með líkaninu á að vera hægt að spá fyrir um kaupverð úr frá stærð. Tilgreinið í texta hvert matið á skurðpunktinum og hallatölunni eru ásamt skýringarhlutfallinu (notið klumpakommur). Segið í örfáum orðum hvað hallatalan segir okkur í þessu tilviki.
-```{r}
+{r}
+# Smíðum einfalt línulegt aðhvarfslíkan
+adhvarfslikan <- lm(kaupverd ~ einflm, data = urtak)
 
-```
+# Skoðum samantekt á líkaninu
+summary(adhvarfslikan)
+
+### Skurðpunktur og Hallatala
+
+- *Skurðpunktur (Intercept):* Áætlaður skurðpunktur er `r round(adhvarfslikan$coefficients[1], 2)`. Þetta þýðir að ef stærð eignarinnar væri 0 fermetrar sem er auðvitað óraunhæft, væri spáð kaupverð að meðaltali `r round(adhvarfslikan$coefficients[1])` krónur. Skurðpunkturinn gefur grunnlínu kaupverðið þegar allar óháðu breyturnar eru 0.
+
+- **Hallatala fyrir einflm:** Hallatalan er `r round(adhvarfslikan$coefficients[2],2)`. Þetta gefur til kynna að fyrir hverja einingu (í þessu tilviki, einn fermetri) aukningu í stærð, hækkar spáð kaupverð um `r round(adhvarfslikan$coefficients[2],2)` krónur. 
+
+### Skýringarhlutfall (R-squared)
+
+- *Multiple R-squared: 0.5274,* þýðir að um það bil 52,74% af breytileikanum í kaupverði eignanna er útskýrður með stærð þeirra. Þetta hlutfall sýnir hversu vel líkanið nær að spá fyrir um kaupverðið út frá breytunni stærð.
+
+### Túlkun á Hallatölunni
+
+Hallatalan segir okkur að það sé jákvæð tengsl á milli stærðar eignar og kaupverðs hennar. Í þessu tilfelli, þýðir jákvæð hallatala að með hverjum fermetra sem eignin er stærri, þá hækkar meðal kaupverðið um `r round(adhvarfslikan$coefficients[2],2)` krónur. Hallatalan veitir mikilvægar upplýsingar um styrk og stefnu sambandsins milli stærðar og kaupverðs; jákvæð hallatala sýnir beinlínis jákvætt samband, sem þýðir að stærri eignir hafa tilhneigingu til að vera dýrari.
+
+### Ályktun
+
+Línulegt aðhvarfslíkanið sýnir sterkt og marktækt samband á milli stærðar eigna og kaupverðs þeirra. Jákvæð hallatala staðfestir að stærri eignir seljast að jafnaði á hærra verði. Skýringarhlutfallið, sem er yfir 50%, bendir til þess að stór hluti af breytileikanum í kaupverði eigna má rekja til þeirra stærðar, sem gefur til kynna að þetta sé mikilvægur þáttur í verðmótun eigna.
 
 
 
